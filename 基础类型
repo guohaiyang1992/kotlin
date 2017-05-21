@@ -1,0 +1,163 @@
+## 简介
+本篇博客主要是介绍Kotlin语法中的基础类型相关的知识，帮助各位更快的掌握Kotlin，如果有疏漏或者错误，请在留言中指正，谢谢。 [系列汇总地址](http://blog.csdn.net/guohaiyang1992/article/details/72615889)
+
+---
+##准备
+在学习之前我们先有点基础知识上的认识，如下：
+
+ - Kotlin和java代码可以混合写，也可以互调。
+
+ - Kotlin中是不写`;`的。
+
+ - Kotlin中使用关键词val表示常量，var表示变量
+
+ - Kotlin中声明变量的模板 `var a:Int =1  ->   var 变量名:类型 = 值`
+
+---
+
+## 基本类型
+对于java中我们都很清楚基本类型有 byte、short、int、long、double、float、boolean、char 等，对于Kotlin中当然也有与其对应的，不过它们更像是java中的包装类 比如`int->Integer ,Kotlin中是Int`
+下面是对应关系(*首字母变大写*)
+- `int->Int`
+- `double->Double`
+- `long->Long`
+- `double->Double`
+- `float->Float`
+- `boolean->Boolean`
+- `char->Char`
+
+对于Kotlin中所有东西都是对象，也就是说我们可以在任何变量上面调用属性和成员变量。
+
+---
+## 数字
+对于Kotlin数字的处理和java类似，但也略有不同，比如没有隐式拓宽转换（对于java中int类型的可以转为long类型的），数字的表示上和java的类似，比如浮点值 12.8f,但Kotlin不支持8进制数值
+
+###存储原理
+java平台上（Kotlin可以编译为javascript）,数字默认是采用java的原生类型，也就是说Int是按照int存储的。但如果我们要使用Int?（"?"表示可能为null，后续会讲解）或者泛型，则数字会自动装箱，也就是说Int按照Integer存储。
+
+需要注意的是数字装箱不会保证同一性，但会保留相等性，举个例子：
+
+```
+val a: Int = 10000 //原生类型存储
+print(a === a) // 地址相同，打印 'true' 
+val boxedA: Int? = a //自动装箱
+val anotherBoxedA: Int? = a //再次装箱
+print(boxedA === anotherBoxedA) // 地址不同 打印 'false'--不保证同一性
+```
+再看以下代码
+
+```
+val a: Int = 10000 //原生类型存储
+print(a == a) // 内容相同
+val boxedA: Int? = a//自动装箱
+val anotherBoxedA: Int? = a//再次装箱
+print(boxedA == anotherBoxedA) //内容相同// Prints 'true'--相等性
+```
+
+此处简单的说明一下"==="和"==" 的区别：
+
+ - "==="表示的是否引用地址相同
+
+ - "==" 表示内容是否相同，等同于equals(),比较其值是否相等
+
+### 类型转换
+ 
+支持表达式形式的隐式转换比如：
+
+```
+var a:Long =1L
+var b:Int=1
+var c=a+b //c是Long型的
+```
+但不支持
+
+```
+var a:Long =1L
+var b:Int=a  //编译报错
+```
+
+
+或者
+
+```
+var b:Int=1
+var a:Long =b //编译报错
+```
+
+但每个数字类型支持如下的转换，用于显式拓宽数字，需要转换的时候可以使用如下函数。
+
+ - `toByte(): Byte`
+ - `toShort(): Short`
+ - `toInt(): Int`
+ - `toLong(): Long`
+ - `toFloat(): Float`
+ - `toDouble(): Double`
+ - `toChar(): Char`
+
+---
+
+## 字符
+Kotlin中字符使用Char来表示，它们不能直接当做数字来处理（不同于java）。字符使用`''`进行括起来，使用特殊字符可以使用转义字符`\`,支持这几个转义序列：`\t、 \b、\n、\r、\'、\"、\\ 和 \$`。
+
+---
+
+## 布尔值
+Kotlin中使用Boolean来表示布尔值，它可以保存两种类型的值`true和false`。
+支持的运算符如下：
+
+ - || – 短路逻辑或
+ - && – 短路逻辑与
+ - ! - 逻辑非
+
+---
+
+## 数组
+Kotlin中使用Array类来表示数组，它定义了`get`和`set`函数（按照运算符重载，内部仍然使用[]来访问）和size 属性。
+下面我们介绍一下如何创建数组
+
+ - 使用`arrayOf`创建数组：`var array: Array<String> = arrayOf("1", "b")`
+ 
+ - 使用`arrayOfNulls`创建数组：`var array3:Array<String?> = arrayOfNulls(5)//指定大小，并用null填充，此处声明使用String?,表示此处内容可能为null`
+
+ - 使用`Array`创建数组：`val asc = Array(5, { i -> (i * i).toString() })// 前面的5是指定大小，后面的i是对应的索引0-4，{} 内的是初始化方法}`
+
+Kotlin 也有无装箱开销的专门的类来表示原生类型数组: ByteArray、 ShortArray、IntArray 等等。这些类和 Array 并没有继承关系，但是 它们有同样的方法属性集。它们也都有相应的工厂方法。
+
+---
+## 字符串
+Kotlin中字符串使用String来表示，字符串是不可变的，可以使用s[i]的形式访问其中的字符，也可以遍历字符串，访问其中的字符。
+Kotlin中有两种字符串，转义字符串和原生字符串（不能使用转义字符），下面介绍一下：
+
+ - 转义字符串：这种类似于java的字符串，`val a:String="test word \n"`
+ - 原生字符串：        
+
+ ```
+  // 上下各三个 """ 引号包裹需要显示的内容
+    val a:String=
+            """
+            白云黑土
+            宇宙洪荒
+            """  //此种字符串会原样输出，保留此处的格式
+ ```
+ 
+---
+
+## 字符串模板
+字符串可以包含字符串模板，就是一小段代码，它的作用就是把求值的结果合并到字符串中，模板表达式使用$ 美元符号，下面举例说明：
+
+```
+val a=10
+val str="a的值是：$a"//输出：a的内容是：10
+```
+还可以用于方法，比如：
+
+```
+val a="test"
+val str="a的内容是：$a,长度是${a.length}"  //输出:a的内容是：test,长度是4
+```
+
+字符串模板支持原生字符串和转义字符串。
+
+---
+##总结
+至此已经学完了Kotlin的基础类型相关的知识，多回顾多思考，继续[后续内容](http://blog.csdn.net/guohaiyang1992/article/details/72615889)。
