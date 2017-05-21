@@ -1,5 +1,5 @@
 # kotlin
-【Kotlin从入门到深坑】让你从对kotlin一无所知到「有所思有所得」
+【Kotlin从入门到深坑】让你从对kotlin一无所知到「有所思有所得」。
 
 本教程是一系列介绍kotlin 的相关语法的教程，后续还有专门讲解kotlin for android 相关的教程。如果内容中出现错误，请留言指正，感谢。
 
