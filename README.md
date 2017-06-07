@@ -13,7 +13,7 @@
  
  - [类和继承](https://github.com/guohaiyang1992/kotlin/blob/master/%E7%B1%BB%E5%92%8C%E7%BB%A7%E6%89%BF.md)
  
- - [类的覆盖属性和方法以及抽象类](https://github.com/guohaiyang1992/kotlin/blob/master/%E7%B1%BB%E7%9A%84%E8%A6%86%E7%9B%96%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95%E4%BB%A5%E5%8F%8A%E6%8A%BD%E8%B1%A1%E7%B1%BB.md
+ - [类的覆盖属性和方法以及抽象类](https://github.com/guohaiyang1992/kotlin/blob/master/%E7%B1%BB%E7%9A%84%E8%A6%86%E7%9B%96%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95%E4%BB%A5%E5%8F%8A%E6%8A%BD%E8%B1%A1%E7%B1%BB.md）
  
 ### 其他
    - [csdn观看](http://blog.csdn.net/guohaiyang1992/article/details/72615889)
